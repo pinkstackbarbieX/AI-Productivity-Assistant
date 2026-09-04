@@ -1,12 +1,13 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { ArrowUp, Sparkles, Square } from "lucide-react";
+import { ArrowUp, FolderPlus, Sparkles, Square } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 
 import { ToolCard } from "@/components/assistant/ToolCard";
+import { SaveToFolderDialog } from "@/components/organizer/SaveToFolderDialog";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
