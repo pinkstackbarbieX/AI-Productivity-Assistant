@@ -1,12 +1,13 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { ArrowUp, Sparkles, Square } from "lucide-react";
+import { ArrowUp, FolderPlus, Sparkles, Square } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 
 import { ToolCard } from "@/components/assistant/ToolCard";
+import { SaveToFolderDialog } from "@/components/organizer/SaveToFolderDialog";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -30,6 +31,7 @@ export function AssistantChat({
   onPendingPromptHandled,
 }: Props) {
   const [input, setInput] = useState("");
+  const [saveTarget, setSaveTarget] = useState<{ title: string; content: string } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const transport = useMemo(
@@ -152,6 +154,17 @@ export function AssistantChat({
                     }
                     return null;
                   })}
+                  {!isBusy && (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="ghost"
+                      className="gap-1.5 text-xs text-muted-foreground hover:text-primary"
+                      onClick={() => setSaveTarget(messageToSave(message))}
+                    >
+                      <FolderPlus className="size-3.5" /> Save to organizer
+                    </Button>
+                  )}
                 </div>
               )}
             </div>
@@ -206,6 +219,38 @@ export function AssistantChat({
           </p>
         </div>
       </div>
+
+      <SaveToFolderDialog
+        open={Boolean(saveTarget)}
+        onOpenChange={(open) => !open && setSaveTarget(null)}
+        content={saveTarget?.content ?? ""}
+        defaultTitle={saveTarget?.title ?? ""}
+        kind="generated work"
+      />
     </div>
   );
+}
+
+function messageToSave(message: UIMessage) {
+  const chunks: string[] = [];
+  for (const part of message.parts) {
+    if (part.type === "text" && part.text.trim()) {
+      chunks.push(part.text.trim());
+    } else if (part.type.startsWith("tool-")) {
+      const toolPart = part as unknown as { type: string; output?: unknown };
+      if (toolPart.output !== undefined) {
+        chunks.push(
+          `${toolPart.type.replace(/^tool-/, "").replace(/_/g, " ")}:\n${JSON.stringify(
+            toolPart.output,
+            null,
+            2,
+          )}`,
+        );
+      }
+    }
+  }
+  const content = chunks.join("\n\n");
+  const firstLine = content.split("\n").find((line) => line.trim().length > 0) ?? "Saved answer";
+  const title = firstLine.replace(/[#*`]/g, "").trim().slice(0, 60) || "Saved answer";
+  return { title, content };
 }
