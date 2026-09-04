@@ -173,7 +173,7 @@ function Dashboard() {
         </div>
 
         <div className="min-h-0 flex-1 space-y-6 overflow-y-auto px-3 pb-6">
-          <div>
+          <div className="space-y-2">
             <Button
               className="w-full justify-start gap-2"
               onClick={() => {
@@ -182,6 +182,11 @@ function Dashboard() {
               }}
             >
               <MessageSquarePlus className="size-4" /> New session
+            </Button>
+            <Button asChild variant="outline" className="w-full justify-start gap-2">
+              <Link to="/organizer" onClick={() => setSidebarOpen(false)}>
+                <FolderOpen className="size-4" /> Organizer
+              </Link>
             </Button>
           </div>
 
