@@ -154,6 +154,17 @@ export function AssistantChat({
                     }
                     return null;
                   })}
+                  {!isBusy && (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="ghost"
+                      className="gap-1.5 text-xs text-muted-foreground hover:text-primary"
+                      onClick={() => setSaveTarget(messageToSave(message))}
+                    >
+                      <FolderPlus className="size-3.5" /> Save to organizer
+                    </Button>
+                  )}
                 </div>
               )}
             </div>
