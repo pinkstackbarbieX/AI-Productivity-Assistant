@@ -3,6 +3,7 @@ import type { UIMessage } from "ai";
 import {
   AlarmClock,
   CalendarClock,
+  FolderOpen,
   Inbox,
   ListChecks,
   LogOut,
