@@ -31,6 +31,7 @@ export function AssistantChat({
   onPendingPromptHandled,
 }: Props) {
   const [input, setInput] = useState("");
+  const [saveTarget, setSaveTarget] = useState<{ title: string; content: string } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const transport = useMemo(
