@@ -219,6 +219,38 @@ export function AssistantChat({
           </p>
         </div>
       </div>
+
+      <SaveToFolderDialog
+        open={Boolean(saveTarget)}
+        onOpenChange={(open) => !open && setSaveTarget(null)}
+        content={saveTarget?.content ?? ""}
+        defaultTitle={saveTarget?.title ?? ""}
+        kind="generated work"
+      />
     </div>
   );
+}
+
+function messageToSave(message: UIMessage) {
+  const chunks: string[] = [];
+  for (const part of message.parts) {
+    if (part.type === "text" && part.text.trim()) {
+      chunks.push(part.text.trim());
+    } else if (part.type.startsWith("tool-")) {
+      const toolPart = part as unknown as { type: string; output?: unknown };
+      if (toolPart.output !== undefined) {
+        chunks.push(
+          `${toolPart.type.replace(/^tool-/, "").replace(/_/g, " ")}:\n${JSON.stringify(
+            toolPart.output,
+            null,
+            2,
+          )}`,
+        );
+      }
+    }
+  }
+  const content = chunks.join("\n\n");
+  const firstLine = content.split("\n").find((line) => line.trim().length > 0) ?? "Saved answer";
+  const title = firstLine.replace(/[#*`]/g, "").trim().slice(0, 60) || "Saved answer";
+  return { title, content };
 }
