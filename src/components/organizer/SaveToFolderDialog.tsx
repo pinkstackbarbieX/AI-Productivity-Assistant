@@ -55,7 +55,7 @@ export function SaveToFolderDialog({ open, onOpenChange, content, defaultTitle, 
       }
       target = createFolder(name).id;
     }
-    saveItem({ folderId: target, title, content, kind });
+    saveItem({ folderId: target, title, content, kind: kind ?? "note" });
     toast.success("Saved to your organizer");
     onOpenChange(false);
   };
