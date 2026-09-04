@@ -51,11 +51,6 @@ Authentication is only required when a feature needs access to a user's email ac
 
 * **Developer:** Siyahluma Mihlali Kobese
 
-**Team Project, if applicable**
-
-* Siyahluma Mihlali Kobese - Developer
-
-
 Aria is a calm, pastel-pink and burgundy workspace that helps knowledge workers get through the
 day: summarise long threads, pull out action items, draft and retune email, build meeting agendas,
 prioritise tasks, write status updates and protect focus time.
