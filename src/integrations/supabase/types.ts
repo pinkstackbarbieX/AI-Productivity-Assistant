@@ -14,7 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      mail_accounts: {
+        Row: {
+          connected_at: string
+          created_at: string
+          display_name: string | null
+          email_address: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          connected_at?: string
+          created_at?: string
+          display_name?: string | null
+          email_address: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          connected_at?: string
+          created_at?: string
+          display_name?: string | null
+          email_address?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      mail_messages: {
+        Row: {
+          account_id: string | null
+          body: string
+          created_at: string
+          folder: string
+          from_address: string
+          id: string
+          is_read: boolean
+          sent_at: string
+          subject: string
+          to_address: string
+          user_id: string
+        }
+        Insert: {
+          account_id?: string | null
+          body?: string
+          created_at?: string
+          folder?: string
+          from_address: string
+          id?: string
+          is_read?: boolean
+          sent_at?: string
+          subject?: string
+          to_address: string
+          user_id: string
+        }
+        Update: {
+          account_id?: string | null
+          body?: string
+          created_at?: string
+          folder?: string
+          from_address?: string
+          id?: string
+          is_read?: boolean
+          sent_at?: string
+          subject?: string
+          to_address?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mail_messages_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "mail_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
