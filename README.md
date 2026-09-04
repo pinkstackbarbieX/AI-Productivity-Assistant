@@ -1,5 +1,61 @@
 # Aria — AI Workplace Productivity Assistant
 
+# AI Workplace Productivity Assistant
+
+## Project Overview
+
+**AI Workplace Productivity Assistant** is an AI-powered workplace productivity web application that brings multiple workplace tasks into one streamlined workspace.
+
+The application uses an interface with a central workspace and sidebar navigation, allowing users to easily switch between different AI productivity tasks.
+
+## Features
+
+* Smart Email Generator
+* Email Threads
+* Meeting Summarizer
+* AI Task Planner
+* AI Research Assistant
+* AI Workplace Chat
+* Editable AI-generated outputs
+* Responsive design
+* Responsible AI disclaimer
+* Modern dashboard interface
+* Sidebar task navigation
+
+## Tools Used
+
+* **Lovable** - Application design and development
+* **Lovable Cloud** - Cloud and backend functionality
+* **AI Integration** - Powers the AI productivity features
+* **GitHub** - Source code management and version control
+
+## Setup Instructions
+
+No installation is required to use the published web application.
+
+1. Open the **AI Workplace Productivity Assistant** website.
+2. The application opens directly to the main workspace.
+3. Select a task from the sidebar.
+4. Enter the required information.
+5. Submit the request to generate an AI response.
+6. Review and edit the generated output.
+7. Copy or use the completed result.
+
+General productivity features can be used without creating an account.
+
+Authentication is only required when a feature needs access to a user's email account, such as retrieving or sending real emails.
+
+## Team Members
+
+**Individual Project**
+
+* **Developer:** Siyahluma Mihlali Kobese
+
+**Team Project, if applicable**
+
+* Siyahluma Mihlali Kobese - Developer
+
+
 Aria is a calm, pastel-pink and burgundy workspace that helps knowledge workers get through the
 day: summarise long threads, pull out action items, draft and retune email, build meeting agendas,
 prioritise tasks, write status updates and protect focus time.
